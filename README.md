@@ -19,17 +19,17 @@ dockermgr update redis
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/redis/rootfs"
+mkdir -p "$HOME/.local/share/srv/docker/redis/volumes"
 git clone "https://github.com/dockermgr/redis" "$HOME/.local/share/CasjaysDev/dockermgr/redis"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/redis/rootfs/." "$HOME/.local/share/srv/docker/redis/rootfs/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/redis/rootfs/." "$HOME/.local/share/srv/docker/redis/volumes/"
 docker run -d \
 --restart always \
 --privileged \
 --name casjaysdevdocker-redis \
 --hostname redis \
 -e TZ=${TIMEZONE:-America/New_York} \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/rootfs/data:/data:z" \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/rootfs/config:/config:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/volumes/data:/data:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/volumes/config:/config:z" \
 -p 80:80 \
 casjaysdevdocker/redis:latest
 ```
@@ -46,8 +46,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=redis
     volumes:
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/rootfs/data:/data:z"
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/rootfs/config:/config:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/volumes/data:/data:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-redis/volumes/config:/config:z"
     ports:
       - 80:80
     restart: always
