@@ -19,8 +19,8 @@ dockermgr update redis
 ## Install and run container
   
 ```shell
-dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs"
-mkdir -p "/var/lib/srv/$USER/docker/redis/rootfs"
+dockerHome="/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs"
+mkdir -p "/srv/$USER/docker/redis/rootfs"
 git clone "https://github.com/dockermgr/redis" "$HOME/.local/share/CasjaysDev/dockermgr/redis"
 cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/redis/rootfs/." "$dockerHome/"
 docker run -d \
@@ -47,8 +47,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=redis
     volumes:
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs/data:/data:z"
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs/config:/config:z"
+      - "/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs/data:/data:z"
+      - "/srv/$USER/docker/casjaysdevdocker/redis/redis/latest/rootfs/config:/config:z"
     ports:
       - 80:80
     restart: always
